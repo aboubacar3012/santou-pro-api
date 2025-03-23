@@ -28,7 +28,7 @@ import { JwtAuthGuard } from '@/modules/auth/jwt-auth.guard';
  * Ce contrôleur fournit des endpoints pour créer, lire, mettre à jour et supprimer des clients.
  * Toutes les routes sont protégées par JwtAuthGuard et nécessitent une authentification.
  */
-@Controller('clients')
+@Controller('api/clients')
 @ApiTags('Clients')
 export class ClientController {
   /**

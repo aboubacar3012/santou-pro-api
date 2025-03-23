@@ -23,7 +23,10 @@ async function bootstrap() {
     .addBearerAuth()
     .addServer('http://localhost:3000')
     .addServer('https://api.template.com')
-    .addTag('users', 'Gestion des utilisateurs')
+    .addTag(
+      'Santou Pro',
+      "L'application de facturation pour les petites entreprises et les indépendants",
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

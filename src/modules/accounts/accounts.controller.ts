@@ -28,7 +28,7 @@ import { AccountEntity } from './entities/account.entity';
  * Ce contrôleur fournit des endpoints pour créer, lire, mettre à jour et supprimer des comptes.
  * Toutes les routes sont protégées par JwtAuthGuard et nécessitent une authentification.
  */
-@Controller('accounts')
+@Controller('api/accounts')
 @ApiTags('Accounts')
 export class AccountsController {
   /**

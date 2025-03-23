@@ -28,7 +28,7 @@ import { JwtAuthGuard } from '@/modules/auth/jwt-auth.guard';
  * Ce contrôleur fournit des endpoints pour créer, lire, mettre à jour et supprimer des entreprises.
  * Toutes les routes sont protégées par JwtAuthGuard et nécessitent une authentification.
  */
-@Controller('enterprises')
+@Controller('api/enterprises')
 @ApiTags('Enterprises')
 export class EnterprisesController {
   /**

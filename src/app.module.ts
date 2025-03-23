@@ -7,6 +7,7 @@ import { AuthModule } from '@/modules/auth/auth.module';
 import { AccountsModule } from '@/modules/accounts/accounts.module';
 import { ClientsModule } from '@/modules/clients/clients.module';
 import { EnterprisesModule } from './modules/enterprises/enterprises.module';
+import { InvoicesModule } from './modules/invoices/invoices.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { EnterprisesModule } from './modules/enterprises/enterprises.module';
     ClientsModule,
     AccountsModule,
     EnterprisesModule,
+    InvoicesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
