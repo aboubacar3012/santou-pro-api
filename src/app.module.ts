@@ -2,11 +2,11 @@ import { Logger, Module } from '@nestjs/common';
 import { AppController } from '@/app.controller';
 import { AppService } from '@/app.service';
 // import { PrismaModule } from '@/prisma/prisma.module';
-import { ArticlesModule } from '@/articles/articles.module';
 import { PrismaModule, QueryInfo, loggingMiddleware } from 'nestjs-prisma';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { ClientModule } from './client/client.module';
+import { ArticlesModule } from '@/modules/articles/articles.module';
+import { UsersModule } from '@/modules/users/users.module';
+import { AuthModule } from '@/modules/auth/auth.module';
+import { ClientModule } from '@/modules/client/client.module';
 
 @Module({
   imports: [
