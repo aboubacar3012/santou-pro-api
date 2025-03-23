@@ -1,0 +1,161 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Enterprise {
+  id                String    @id @default(uuid())
+  name              String
+  legalForm         String?
+  registrationNum   String?
+  taxId             String?
+  vatNumber         String?
+  industry          String?
+  numberOfEmployees Int?
+  website           String?
+  description       String?
+  accounts          Account[]
+  clients           Client[]
+  invoices          Invoice[]
+  currency          String    @default("GNF")
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+}
+
+model Account {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  password     String
+  role         AccountRole   @default(USER)
+  status       AccountStatus @default(ACTIVE)
+  permissions  Permissions[] @default([READ])
+  isFirstLogin Boolean       @default(true)
+  isActive     Boolean       @default(true)
+
+  // Relation avec Enterprise (optionnelle pour les admins)
+  enterprise   Enterprise? @relation(fields: [enterpriseId], references: [id])
+  enterpriseId String?
+
+  // Relation optionnelle avec Client
+  client   Client? @relation(fields: [clientId], references: [id])
+  clientId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Client {
+  id        String     @id @default(uuid())
+  type      ClientType
+  company   String?
+  firstName String?
+  lastName  String?
+  logo      String?
+  address   String
+  email     String     @unique
+  phone     String
+  website   String?
+
+  // Relations
+  enterprise   Enterprise @relation(fields: [enterpriseId], references: [id])
+  enterpriseId String
+  accounts     Account[]
+  invoices     Invoice[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Invoice {
+  id               String           @id @default(uuid())
+  invoiceNumber    String
+  name             String
+  link             String?
+  date             String
+  amount           String
+  paymentMode      PaymentMode
+  status           InvoiceStatus    @default(DRAFT)
+  paymentCondition PaymentCondition
+  tva              String?
+  remark           String?
+
+  // Relations
+  client       Client           @relation(fields: [clientId], references: [id])
+  clientId     String
+  enterprise   Enterprise       @relation(fields: [enterpriseId], references: [id])
+  enterpriseId String
+  articles     InvoiceArticle[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model InvoiceArticle {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  quantity    String @default("1")
+  price       String
+
+  // Relation
+  invoice   Invoice @relation(fields: [invoiceId], references: [id])
+  invoiceId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ClientType {
+  PARTICULAR
+  PROFESSIONAL
+}
+
+enum PaymentMode {
+  CASH 
+  OM
+  CB
+  VIREMENT
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  CANCELLED
+}
+
+enum PaymentCondition {
+  NOW
+  FIFTEEN     @map("15")
+  THIRTY      @map("30")
+  FORTYFIVE   @map("45")
+  SIXTY       @map("60")
+  UPONRECEIPT
+}
+
+enum AccountRole {
+  ADMIN
+  ENTERPRISE
+  USER
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum Permissions {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+}
