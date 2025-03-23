@@ -17,12 +17,10 @@ async function bootstrap() {
 
   // Configuration de Swagger pour générer la documentation de l'API
   const config = new DocumentBuilder()
-    .setTitle('Template API')
-    .setDescription('API template play avec NestJS')
-    .setContact('template', 'https://template.com', 'contact@template.com')
+    .setTitle('Santou Pro API')
+    .setDescription('Santou Pro API - Documentation')
     .setVersion('0.1')
     .addBearerAuth()
-    // .addApiKey({ type: 'apiKey', name: 'X-API-KEY', in: 'header' }) // Ajout d'un API Key
     .addServer('http://localhost:3000')
     .addServer('https://api.template.com')
     .addTag('users', 'Gestion des utilisateurs')
@@ -39,4 +37,7 @@ async function bootstrap() {
 }
 
 // Initialisation de l'application
-bootstrap();
+bootstrap().catch((err) => {
+  console.error('Failed to start application:', err);
+  process.exit(1);
+});
