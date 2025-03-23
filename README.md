@@ -14,6 +14,15 @@ Ce projet est un template NestJS utilisant Prisma comme ORM pour développer rap
 - npm ou yarn
 - Une base de données PostgreSQL (ou autre selon votre configuration Prisma)
 
+## 📚 Documentation API (Swagger)
+
+La documentation interactive de l'API est disponible via Swagger UI à l'adresse:
+
+[http://localhost:3000/api](http://localhost:3000/api)
+
+Vous pouvez explorer et tester tous les endpoints disponibles directement depuis cette interface.
+
+
 ## 🔧 Installation
 
 ```bash
