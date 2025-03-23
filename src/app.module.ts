@@ -6,6 +6,7 @@ import { ArticlesModule } from '@/articles/articles.module';
 import { PrismaModule, QueryInfo, loggingMiddleware } from 'nestjs-prisma';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { ClientModule } from './client/client.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AuthModule } from './auth/auth.module';
     ArticlesModule,
     UsersModule,
     AuthModule,
+    ClientModule,
   ],
   controllers: [AppController],
   providers: [AppService],

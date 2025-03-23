@@ -3,10 +3,14 @@ import {
   AccountRole,
   AccountStatus,
   Permissions,
+  Enterprise,
 } from '@prisma/client';
 import { hashPassword, commonPasswords } from './utils';
 
-export async function seedAccounts(prisma: PrismaClient, enterprises: any[]) {
+export async function seedAccounts(
+  prisma: PrismaClient,
+  enterprises: Enterprise[],
+) {
   const passwords = {
     admin: await hashPassword(commonPasswords.admin),
     user: await hashPassword(commonPasswords.user),

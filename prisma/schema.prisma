@@ -59,8 +59,8 @@ model Client {
   lastName  String?
   logo      String?
   address   String
-  email     String     @unique
-  phone     String
+  email     String?     @unique
+  phone     String     @unique
   website   String?
 
   // Relations
@@ -118,7 +118,7 @@ enum ClientType {
 }
 
 enum PaymentMode {
-  CASH 
+  CASH
   OM
   CB
   VIREMENT
