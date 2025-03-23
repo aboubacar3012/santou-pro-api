@@ -3,8 +3,8 @@ import { AuthService } from '@/modules/auth/auth.service';
 import { AuthController } from '@/modules/auth/auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { UsersModule } from '@/modules/users/users.module';
 import { JwtStrategy } from '@/modules/auth/jwt.strategy';
+import { AccountsModule } from '@/modules/accounts/accounts.module';
 
 export const jwtSecret =
   'b4c1b3b0-1b4b-4b7b-8b4b-4b1b3b0b4c1b-d4c1b3b0-1b4b-4b7b-8b4b-4b1b3b0b4c1b';
@@ -20,7 +20,7 @@ export const jwtSecret =
       secret: jwtSecret,
       signOptions: { expiresIn: '1d' }, // 1 jour: c'est la durée de validité du token
     }),
-    UsersModule,
+    AccountsModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],

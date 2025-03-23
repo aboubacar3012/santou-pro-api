@@ -32,17 +32,17 @@ export class AuthService {
    */
   async login(email: string, password: string): Promise<AuthEntity> {
     // Étape 1: Récupérer un utilisateur avec l'email fourni
-    const user = await this.prisma.account.findUnique({
+    const account = await this.prisma.account.findUnique({
       where: { email: email },
     });
 
     // Si aucun utilisateur n'est trouvé, lancer une erreur
-    if (!user) {
-      throw new NotFoundException(`No user found for email: ${email}`);
+    if (!account) {
+      throw new NotFoundException(`No account found for email: ${email}`);
     }
 
     // Étape 2: Vérifier si le mot de passe est correct
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, account.password);
 
     // Si le mot de passe ne correspond pas, lancer une erreur
     if (!isPasswordValid) {
@@ -51,7 +51,7 @@ export class AuthService {
 
     // Étape 3: Générer un JWT contenant l'ID de l'utilisateur et le retourner
     return {
-      accessToken: this.jwtService.sign({ userId: user.id }),
+      accessToken: this.jwtService.sign({ userId: account.id }),
     };
   }
 

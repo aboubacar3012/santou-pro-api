@@ -1,36 +1,36 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAccountDto } from './dto/create-account.dto';
-import { UpdateAccountDto } from './dto/update-account.dto';
+import { CreateEnterpriseDto } from './dto/create-enterprise.dto';
+import { UpdateEnterpriseDto } from './dto/update-enterprise.dto';
 import { PrismaService } from 'nestjs-prisma';
 import { PaginationDto } from '@/common/dto/pagination.dto';
 import { PaginatedResponseDto } from '@/common/dto/paginatedResponse.dto';
-import { Account } from '@prisma/client';
+import { Enterprise } from '@prisma/client';
 
 @Injectable()
-export class AccountsService {
+export class EnterprisesService {
   constructor(private prisma: PrismaService) {}
 
-  create(createAccountDto: CreateAccountDto) {
-    return this.prisma.account.create({
-      data: createAccountDto,
+  create(createEnterpriseDto: CreateEnterpriseDto) {
+    return this.prisma.enterprise.create({
+      data: createEnterpriseDto,
     });
   }
 
   async findAll(
     query: PaginationDto = {},
-  ): Promise<PaginatedResponseDto<Account>> {
+  ): Promise<PaginatedResponseDto<Enterprise>> {
     const { page = 1, limit = 10 } = query;
     const skip = (page - 1) * limit;
 
     const [items, totalItems] = await Promise.all([
-      this.prisma.account.findMany({
+      this.prisma.enterprise.findMany({
         take: Number(limit),
         skip: Number(skip),
         orderBy: {
           createdAt: 'desc',
         },
       }),
-      this.prisma.account.count(),
+      this.prisma.enterprise.count(),
     ]);
 
     const result = {
@@ -47,20 +47,20 @@ export class AccountsService {
   }
 
   findOne(id: string) {
-    return this.prisma.account.findUnique({
+    return this.prisma.enterprise.findUnique({
       where: { id },
     });
   }
 
-  update(id: string, updateAccountDto: UpdateAccountDto) {
-    return this.prisma.account.update({
+  update(id: string, updateEnterpriseDto: UpdateEnterpriseDto) {
+    return this.prisma.enterprise.update({
       where: { id },
-      data: updateAccountDto,
+      data: updateEnterpriseDto,
     });
   }
 
   remove(id: string) {
-    return this.prisma.account.delete({
+    return this.prisma.enterprise.delete({
       where: { id },
     });
   }

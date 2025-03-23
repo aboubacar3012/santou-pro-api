@@ -3,11 +3,10 @@ import { AppController } from '@/app.controller';
 import { AppService } from '@/app.service';
 // import { PrismaModule } from '@/prisma/prisma.module';
 import { PrismaModule, QueryInfo, loggingMiddleware } from 'nestjs-prisma';
-import { ArticlesModule } from '@/modules/articles/articles.module';
-import { UsersModule } from '@/modules/users/users.module';
 import { AuthModule } from '@/modules/auth/auth.module';
 import { AccountsModule } from '@/modules/accounts/accounts.module';
 import { ClientsModule } from '@/modules/clients/clients.module';
+import { EnterprisesModule } from './modules/enterprises/enterprises.module';
 
 @Module({
   imports: [
@@ -24,11 +23,10 @@ import { ClientsModule } from '@/modules/clients/clients.module';
         ],
       },
     }),
-    ArticlesModule,
-    UsersModule,
     AuthModule,
     ClientsModule,
     AccountsModule,
+    EnterprisesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

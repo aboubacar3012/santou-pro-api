@@ -37,7 +37,6 @@ model Account {
   status       AccountStatus @default(ACTIVE)
   permissions  Permissions[] @default([READ])
   isFirstLogin Boolean       @default(true)
-  isActive     Boolean       @default(true)
 
   // Relation avec Enterprise (optionnelle pour les admins)
   enterprise   Enterprise? @relation(fields: [enterpriseId], references: [id])
