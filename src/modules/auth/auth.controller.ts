@@ -10,9 +10,9 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   /**
-   * Handles user login.
-   * @param {LoginDto} loginDto - The login data transfer object containing email and password.
-   * @returns {Promise<AuthEntity>} The authentication entity containing user details and token.
+   * Gère la connexion de l'utilisateur.
+   * @param {LoginDto} loginDto - L'objet de transfert de données de connexion contenant l'email et le mot de passe.
+   * @returns {Promise<AuthEntity>} L'entité d'authentification contenant les détails de l'utilisateur et le token.
    */
   @Post('login')
   @ApiOkResponse({ type: AuthEntity })
