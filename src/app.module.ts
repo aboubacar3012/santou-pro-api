@@ -6,7 +6,8 @@ import { PrismaModule, QueryInfo, loggingMiddleware } from 'nestjs-prisma';
 import { ArticlesModule } from '@/modules/articles/articles.module';
 import { UsersModule } from '@/modules/users/users.module';
 import { AuthModule } from '@/modules/auth/auth.module';
-import { ClientModule } from '@/modules/client/client.module';
+import { AccountsModule } from '@/modules/accounts/accounts.module';
+import { ClientsModule } from '@/modules/clients/clients.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { ClientModule } from '@/modules/client/client.module';
     ArticlesModule,
     UsersModule,
     AuthModule,
-    ClientModule,
+    ClientsModule,
+    AccountsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

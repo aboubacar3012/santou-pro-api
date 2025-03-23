@@ -10,7 +10,7 @@ import {
   NotFoundException,
   UseGuards,
 } from '@nestjs/common';
-import { ClientService } from './client.service';
+import { ClientService } from './clients.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { PaginationDto } from '@/common/dto/pagination.dto';
@@ -20,8 +20,8 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from '@/auth/jwt-auth.guard';
-import { ClientEntity } from './entities/client.entity';
+import { ClientEntity } from '@/modules/clients/entities/client.entity';
+import { JwtAuthGuard } from '@/modules/auth/jwt-auth.guard';
 
 /**
  * Contrôleur pour gérer les opérations CRUD liées aux clients.

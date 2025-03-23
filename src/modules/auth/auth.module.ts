@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from '@/auth/auth.service';
-import { AuthController } from '@/auth/auth.controller';
+import { AuthService } from '@/modules/auth/auth.service';
+import { AuthController } from '@/modules/auth/auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { UsersModule } from '@/users/users.module';
-import { JwtStrategy } from '@/auth/jwt.strategy';
+import { UsersModule } from '@/modules/users/users.module';
+import { JwtStrategy } from '@/modules/auth/jwt.strategy';
 
 export const jwtSecret =
   'b4c1b3b0-1b4b-4b7b-8b4b-4b1b3b0b4c1b-d4c1b3b0-1b4b-4b7b-8b4b-4b1b3b0b4c1b';
