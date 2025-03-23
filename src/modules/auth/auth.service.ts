@@ -56,6 +56,19 @@ export class AuthService {
   }
 
   /**
+   * Vérifie si un utilisateur existe dans la base de données par son email.
+   * @param {string} email - L'email de l'utilisateur à vérifier.
+   * @returns {Promise<{ exists: boolean }>} Un objet indiquant si l'utilisateur existe.
+   */
+  async checkUserExist(email: string): Promise<{ exists: boolean }> {
+    const user = await this.prisma.account.findUnique({
+      where: { email },
+    });
+
+    return { exists: !!user };
+  }
+
+  /**
    * Trouve un utilisateur par son ID.
    * @param {string} id - L'ID de l'utilisateur à trouver.
    * @returns {Promise<any>} L'utilisateur trouvé.

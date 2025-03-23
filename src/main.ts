@@ -9,6 +9,13 @@ import { PrismaClientExceptionFilter } from 'nestjs-prisma';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Enable CORS
+  app.enableCors({
+    origin: ['http://localhost:3000'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    credentials: true,
+  });
+
   // Middleware global
   // Utilisation de la classe ValidationPipe pour valider les données entrantes
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
@@ -21,7 +28,7 @@ async function bootstrap() {
     .setDescription('Santou Pro API - Documentation')
     .setVersion('0.1')
     .addBearerAuth()
-    .addServer('http://localhost:3000')
+    .addServer('http://localhost:3001')
     .addServer('https://api.template.com')
     .addTag(
       'Santou Pro',
@@ -36,7 +43,7 @@ async function bootstrap() {
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
 
   // Démarrage de l'application
-  await app.listen(3000);
+  await app.listen(3001);
 }
 
 // Initialisation de l'application
