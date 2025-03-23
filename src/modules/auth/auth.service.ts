@@ -52,6 +52,7 @@ export class AuthService {
 
     // Étape 3: Générer un JWT contenant l'ID de l'utilisateur et le retourner
     return {
+      account,
       accessToken: this.jwtService.sign({
         userId: account.id,
         userEmail: email,
@@ -93,6 +94,7 @@ export class AuthService {
 
     // Générer un JWT
     return {
+      account: newAccount,
       accessToken: this.jwtService.sign({
         userId: newAccount.id,
         userEmail: newAccount.email,
