@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
   UnauthorizedException,
+  ConflictException,
 } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
 import { JwtService } from '@nestjs/jwt';
@@ -51,7 +52,51 @@ export class AuthService {
 
     // Étape 3: Générer un JWT contenant l'ID de l'utilisateur et le retourner
     return {
-      accessToken: this.jwtService.sign({ userId: account.id }),
+      accessToken: this.jwtService.sign({
+        userId: account.id,
+        userEmail: email,
+      }),
+    };
+  }
+
+  /**
+   * Crée un nouveau compte utilisateur
+   * @param {string} email - L'email de l'utilisateur
+   * @param {string} password - Le mot de passe de l'utilisateur
+   * @param {AccountRole} role - Le rôle du compte (optionnel)
+   * @param {string} enterpriseId - L'ID de l'entreprise liée (optionnel)
+   * @returns {Promise<AuthEntity>} - L'entité d'authentification contenant le jeton d'accès
+   * @throws {ConflictException} - Si un compte existe déjà avec cet email
+   */
+  async signup(email: string, password: string): Promise<AuthEntity> {
+    // Vérifier si un compte existe déjà avec cet email
+    const existingAccount = await this.prisma.account.findUnique({
+      where: { email },
+    });
+
+    if (existingAccount) {
+      throw new ConflictException(
+        `Un compte existe déjà avec l'email: ${email}`,
+      );
+    }
+
+    // Hasher le mot de passe
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Créer le nouveau compte
+    const newAccount = await this.prisma.account.create({
+      data: {
+        email,
+        password: hashedPassword,
+      },
+    });
+
+    // Générer un JWT
+    return {
+      accessToken: this.jwtService.sign({
+        userId: newAccount.id,
+        userEmail: newAccount.email,
+      }),
     };
   }
 

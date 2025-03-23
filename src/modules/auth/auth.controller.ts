@@ -1,9 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthEntity } from './entity/auth.entity';
 import { LoginDto } from './dto/login.dto';
 import { CheckUserExistDto } from './dto/check-user-exist.dto';
+import { SignupDto } from './dto/signup.dto';
 
 @Controller('api/auth')
 @ApiTags('Auth')
@@ -16,7 +17,7 @@ export class AuthController {
    * @returns {Promise<AuthEntity>} L'entité d'authentification contenant les détails de l'utilisateur et le token.
    */
   @Post('login')
-  @ApiOkResponse({ type: AuthEntity })
+  @ApiResponse({ type: AuthEntity })
   login(@Body() { email, password }: LoginDto): Promise<AuthEntity> {
     return this.authService.login(email, password);
   }
@@ -27,7 +28,7 @@ export class AuthController {
    * @returns {Promise<{ exists: boolean }>} Un objet indiquant si l'utilisateur existe.
    */
   @Post('check-user-exist')
-  @ApiOkResponse({
+  @ApiResponse({
     schema: {
       type: 'object',
       properties: {
@@ -42,5 +43,20 @@ export class AuthController {
     @Body() { email }: CheckUserExistDto,
   ): Promise<{ exists: boolean }> {
     return this.authService.checkUserExist(email);
+  }
+
+  /**
+   * Inscription d'un nouvel utilisateur
+   * @param {SignupDto} signupDto - Les données d'inscription
+   * @returns {Promise<AuthEntity>} L'entité d'authentification contenant les détails de l'utilisateur et le token
+   */
+  @Post('signup')
+  @ApiResponse({
+    type: AuthEntity,
+    description:
+      "Crée un nouveau compte et retourne un token d'authentification",
+  })
+  signup(@Body() signupDto: SignupDto): Promise<AuthEntity> {
+    return this.authService.signup(signupDto.email, signupDto.password);
   }
 }
