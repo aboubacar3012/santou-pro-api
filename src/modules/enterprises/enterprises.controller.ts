@@ -64,9 +64,9 @@ export class EnterprisesController {
   async findAll(@Query() query: PaginationDto) {
     const response = await this.enterprisesService.findAll(query);
     return {
-      items: response.items.map(
-        (enterprise) => new EnterpriseEntity(enterprise),
-      ),
+      items: Array.isArray(response.items)
+        ? response.items.map((enterprise) => new EnterpriseEntity(enterprise))
+        : [],
       pagination: response.pagination,
     };
   }

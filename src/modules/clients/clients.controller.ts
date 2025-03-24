@@ -60,10 +60,16 @@ export class ClientController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiResponse({ type: ClientEntity, isArray: true })
-  async findAll(@Query() query: PaginationDto) {
-    const response = await this.clientService.findAll(query);
+  async findAll(
+    @Query() query: PaginationDto,
+    @Query('enterpriseId') enterpriseId?: string,
+  ) {
+    const response = await this.clientService.findAll(query, enterpriseId);
+    // Ensure we're correctly accessing the items property
     return {
-      items: response.items.map((client) => new ClientEntity(client)),
+      items: Array.isArray(response.items)
+        ? response.items.map((client) => new ClientEntity(client))
+        : [],
       pagination: response.pagination,
     };
   }

@@ -63,7 +63,9 @@ export class AccountsController {
   async findAll(@Query() query: PaginationDto) {
     const response = await this.accountsService.findAll(query);
     return {
-      items: response.items.map((account) => new AccountEntity(account)),
+      items: Array.isArray(response.items)
+        ? response.items.map((account) => new AccountEntity(account))
+        : [],
       pagination: response.pagination,
     };
   }

@@ -17,20 +17,29 @@ export class ClientService {
 
   async findAll(
     query: PaginationDto = {},
+    enterpriseId?: string,
   ): Promise<PaginatedResponseDto<Client>> {
     const { page = 1, limit = 10 } = query;
     const skip = (page - 1) * limit;
+
+    const where = enterpriseId ? { enterpriseId } : {};
 
     const [items, totalItems] = await Promise.all([
       this.prisma.client.findMany({
         take: Number(limit),
         skip: Number(skip),
+        where,
+        include: {
+          invoices: true,
+        },
         orderBy: {
           createdAt: 'desc',
         },
       }),
-      this.prisma.client.count(),
+      this.prisma.client.count({ where }),
     ]);
+
+    console.log('items', items);
 
     const result = {
       items,
