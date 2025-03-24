@@ -16,7 +16,7 @@ export async function seedInvoices(
   const invoicesForAbouSolutions = await Promise.all([
     prisma.invoice.create({
       data: {
-        invoiceNumber: 'INV-2023-001',
+        invoiceNumber: 'FACTURE-2023-001',
         name: 'Facture Services Informatiques',
         date: '2023-05-15',
         amount: '5000000',
@@ -47,7 +47,7 @@ export async function seedInvoices(
     }),
     prisma.invoice.create({
       data: {
-        invoiceNumber: 'INV-2023-002',
+        invoiceNumber: 'FACTURE-2023-002',
         name: 'Facture Maintenance',
         date: '2023-06-01',
         amount: '1500000',
@@ -71,7 +71,7 @@ export async function seedInvoices(
     }),
     prisma.invoice.create({
       data: {
-        invoiceNumber: 'INV-2023-003',
+        invoiceNumber: 'FACTURE-2023-003',
         name: 'Développement Application Mobile',
         date: '2023-07-10',
         amount: '8000000',
@@ -101,7 +101,7 @@ export async function seedInvoices(
     }),
     prisma.invoice.create({
       data: {
-        invoiceNumber: 'INV-2023-004',
+        invoiceNumber: 'FACTURE-2023-004',
         name: 'Formation en Cybersécurité',
         date: '2023-08-05',
         amount: '2000000',
@@ -131,7 +131,7 @@ export async function seedInvoices(
     }),
     prisma.invoice.create({
       data: {
-        invoiceNumber: 'INV-2023-005',
+        invoiceNumber: 'FACTURE-2023-005',
         name: 'Audit Système Informatique',
         date: '2023-09-15',
         amount: '3500000',

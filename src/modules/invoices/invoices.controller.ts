@@ -71,7 +71,7 @@ export class InvoicesController {
   @ApiBearerAuth()
   @ApiResponse({ type: DashboardResponseDto })
   async getDashboard(@Query() query: DashboardQueryDto) {
-    console.warn('query', query);
+    console.log('query', query);
     return await this.invoicesService.getDashboard(query);
   }
 
