@@ -165,7 +165,7 @@ export class InvoicesService {
   /**
    * Récupère les données de tableau de bord pour une entreprise, avec filtrage par période et statut
    * @param query - Les paramètres de recherche pour le tableau de bord
-   * @returns Les données du tableau de bord
+   * @returns Les données du tableau de bord de l'entreprise
    */
   async getDashboard(query: DashboardQueryDto): Promise<DashboardResponseDto> {
     const { period, status, enterpriseId } = query;
