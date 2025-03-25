@@ -8,6 +8,7 @@ import { PrismaClientExceptionFilter } from 'nestjs-prisma';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port = process.env.PORT || 3001;
 
   // Enable CORS
   app.enableCors({
@@ -41,9 +42,11 @@ async function bootstrap() {
   // Gestion des exceptions Prisma
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
-
   // Démarrage de l'application
-  await app.listen(3001);
+
+  await app.listen(port, '0.0.0.0', () => {
+    console.log(`App listening at http://0.0.0.0:${port}`);
+  });
 }
 
 // Initialisation de l'application
