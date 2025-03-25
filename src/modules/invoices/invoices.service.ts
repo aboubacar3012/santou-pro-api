@@ -170,7 +170,7 @@ export class InvoicesService {
   async getDashboard(query: DashboardQueryDto): Promise<DashboardResponseDto> {
     const { period, status, enterpriseId } = query;
 
-    // Get all invoices for the enterprise including client information
+    // Get all invoices for the enterprise including client informatio
     const allInvoices = await this.prisma.invoice.findMany({
       where: { enterpriseId },
       include: {
