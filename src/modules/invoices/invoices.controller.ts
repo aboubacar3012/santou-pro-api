@@ -40,11 +40,12 @@ export class InvoicesController {
    * @param createInvoiceDto - Les données de la facture à créer
    * @returns La facture nouvellement créée
    */
-  @Post()
+  @Post('create')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ type: InvoiceEntity })
   async create(@Body() createInvoiceDto: CreateInvoiceDto) {
+    console.log('createInvoiceDto', createInvoiceDto);
     return await this.invoicesService.create(createInvoiceDto);
   }
 
