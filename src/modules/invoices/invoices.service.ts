@@ -184,7 +184,7 @@ export class InvoicesService {
 
     console.log({ allInvoices });
 
-    // Filter by period
+    // Filter by period2
     const filteredByPeriod = this.filterByPeriod(allInvoices, period);
 
     // Filter by status
