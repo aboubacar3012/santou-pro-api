@@ -26,6 +26,10 @@ export class AccountsService {
       this.prisma.account.findMany({
         take: Number(limit),
         skip: Number(skip),
+        include: {
+          enterprise: true,
+          client: true,
+        },
         orderBy: {
           createdAt: 'desc',
         },

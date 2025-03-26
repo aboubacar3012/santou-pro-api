@@ -96,6 +96,8 @@ export class InvoicesService {
       where: { id },
       include: {
         articles: true,
+        enterprise: true,
+        client: true,
       },
     });
 

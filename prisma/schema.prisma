@@ -19,6 +19,10 @@ model Enterprise {
   vatNumber         String?
   industry          String?
   numberOfEmployees Int?
+  logo              String?
+  address           String    @default("")
+  email             String    @unique @default("")
+  phone             String    @unique @default("")
   website           String?
   description       String?
   accounts          Account[]

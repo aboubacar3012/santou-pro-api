@@ -124,6 +124,10 @@ export class AuthService {
   async findOne(id: string): Promise<Account | null> {
     return await this.prisma.account.findUnique({
       where: { id },
+      include: {
+        enterprise: true,
+        client: true,
+      },
     });
   }
 }
