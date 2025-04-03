@@ -1,6 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Tables existantes : Enterprise, Account, Client, Invoice, InvoiceArticle
 generator client {
   provider = "prisma-client-js"
 }
@@ -31,6 +32,7 @@ model Enterprise {
   currency          String    @default("GNF")
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
+  @@map("enterprise")
 }
 
 model Account {
@@ -52,6 +54,8 @@ model Account {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("account")
 }
 
 model Client {
@@ -74,6 +78,7 @@ model Client {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  @@map("client")
 }
 
 model Invoice {
@@ -98,6 +103,7 @@ model Invoice {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  @@map("invoice")
 }
 
 model InvoiceArticle {
@@ -113,6 +119,7 @@ model InvoiceArticle {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  @@map("invoicearticle")
 }
 
 enum ClientType {

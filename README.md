@@ -148,3 +148,23 @@ Le `JwtAuthGuard` protège les ressources nécessitant une authentification.
 ## 📝 Licence
 
 [MIT](LICENSE)
+
+
+1. Construire l'image Docker
+Exécutez cette commande dans le répertoire contenant le fichier Dockerfile :
+
+docker build -t santou-pro-api .
+docker build --platform linux/amd64 -t aboubacar99/santou-pro-api:v1.1 .
+
+docker push aboubacar99/santou-pro-api:v1.1
+
+2. Exécuter le conteneur Docker
+Lancez le conteneur en mappant le port 3001 du conteneur au port 3001 de votre machine hôte :
+
+docker run -p 3001:3001 santou-pro-api
+
+docker run --platform linux/amd64 -p 3001:3001 aboubacar99/santou-pro-api:v1.1
+
+3. Accéder à l'application
+L'application sera accessible à l'adresse suivante :
+http://localhost:3001
