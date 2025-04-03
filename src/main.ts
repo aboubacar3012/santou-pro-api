@@ -10,12 +10,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT || 3001;
 
-  // Enable CORS
-  app.enableCors({
-    origin: ['http://localhost:3000', 'https://santu-frontend.vercel.app/'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    credentials: true,
-  });
+  // app.enableCors({
+  //   origin: ['http://localhost:3000', 'https://santu-frontend.vercel.app/'],
+  //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  //   credentials: true,
+  // });
+
+  // Enable CORS: allow all origins
+  app.enableCors();
 
   // Middleware global
   // Utilisation de la classe ValidationPipe pour valider les données entrantes
